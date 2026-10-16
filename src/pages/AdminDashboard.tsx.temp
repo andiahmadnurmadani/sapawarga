@@ -1,0 +1,94 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { 
+  LayoutDashboard, 
+  Users, 
+  FileText, 
+  Megaphone, 
+  Settings, 
+  LogOut, 
+  Search, 
+  Filter, 
+  Check, 
+  X, 
+  MoreVertical,
+  Plus,
+  ArrowRight,
+  Download,
+  Trash2,
+  Edit2,
+  UserPlus,
+  Bell,
+  User as UserIcon,
+  XCircle,
+  CheckCircle2,
+  Clock,
+  Home,
+  Mail,
+  Pen,
+  History,
+  BookOpen,
+  ArrowRightLeft,
+  Calendar,
+  Box,
+  AlertTriangle,
+  FileSearch,
+  Globe,
+  ClipboardList,
+  Type,
+  Table,
+  Minus,
+  Square,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  GripVertical,
+  MoveHorizontal,
+  Upload
+} from 'lucide-react';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { 
+  User, 
+  PengajuanSurat, 
+  SuratStatus, 
+  SuratType, 
+  InfoRT, 
+  AppConfig, 
+  Inventory, 
+  IncidentLog, 
+  TempResident,
+  SuratBlock,
+  BlockType
+} from '../types';
+import { storage } from '../services/storage';
+import { generatePDF } from '../utils';
+
+// Helper for unique IDs
+function generateId() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
+export default function AdminDashboard() {
+  // ... rest of the component
+}

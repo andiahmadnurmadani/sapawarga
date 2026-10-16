@@ -1,0 +1,25 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+
+# Env files — jangan commit file yang berisi secret
+.env
+.env.development
+.env.production
+backend/.env
+backend/.env.development
+backend/.env.production
+
+# Template env (boleh commit, berisi placeholder saja)
+!.env.example
+!.env.production.example
+!backend/.env.example
+!backend/.env.production.example
+
+# Tambahan: arsip & backup yang tidak perlu masuk repo
+.env.bak-*
+fdsf.zip
+backend/uploads/

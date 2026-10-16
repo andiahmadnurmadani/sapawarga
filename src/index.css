@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700&display=swap');
+@import "tailwindcss";
+
+/* Aktifkan dark mode berbasis class .dark di <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ============================================================
+   Cross-platform consistency
+   ============================================================
+   - Force konsistensi font rendering antar OS (Windows/Linux/macOS)
+   - Fix box-sizing dan reset minimal
+   - Smooth scrolling, prevent horizontal overflow di mobile
+   ============================================================ */
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 16px; /* base konsisten untuk rem */
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+  overflow-x: hidden; /* cegah horizontal scroll di mobile */
+  min-height: 100vh;
+  min-height: 100dvh; /* dynamic viewport height untuk mobile browser */
+}
+
+/* Fix scrollbar agar tidak bikin layout shift di Windows vs Linux */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Custom scrollbar yang konsisten antar OS */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgb(203 213 225 / 0.6);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(148 163 184 / 0.8);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+.dark *::-webkit-scrollbar-thumb {
+  background: rgb(51 65 85 / 0.6);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(203 213 225 / 0.6) transparent;
+}
+.dark * {
+  scrollbar-color: rgb(51 65 85 / 0.6) transparent;
+}
+
+/* Cegah input zoom di iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Konsistensi tombol & input antar browser */
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* Pastikan image responsif by default */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+@layer utilities {
+  .animate-shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Utility untuk safe-area iOS notch */
+  .safe-top { padding-top: env(safe-area-inset-top); }
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}

@@ -1,0 +1,39 @@
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import {defineConfig, loadEnv} from 'vite';
+
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, '.', '');
+  const isDev = mode === 'development';
+
+  return {
+    plugins: [react(), tailwindcss()],
+    define: {
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      },
+    },
+    server: {
+      // HMR is disabled in AI Studio via DISABLE_HMR env var.
+      // Do not modify — file watching is disabled to prevent flickering during agent edits.
+      hmr: process.env.DISABLE_HMR !== 'true',
+      // Proxy hanya aktif saat development agar /api diteruskan ke backend lokal
+      ...(isDev && {
+        proxy: {
+          '/api': {
+            target: env.VITE_API_URL
+              ? new URL(env.VITE_API_URL).origin
+              : 'http://localhost:5000',
+            changeOrigin: true,
+          },
+        },
+      }),
+    },
+    // Pastikan semua VITE_ env tersedia di build
+    envPrefix: 'VITE_',
+  };
+});
