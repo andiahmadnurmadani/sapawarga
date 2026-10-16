@@ -42,6 +42,8 @@ const allowedOrigins = isProd
       'http://localhost:5173',
       'http://localhost:5174',
       'http://localhost:4173', // vite preview
+      'https://hallowarga.com',
+      'http://hallowarga.com',
     ];
 
 app.use(cors({
